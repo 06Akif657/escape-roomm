@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Code in the Attic</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #111; color: #fff; text-align: center; padding: 40px; }
+    .puzzle, #success { display: none; }
+    .visible { display: block; }
+    input[type="text"] { padding: 8px; margin: 10px; width: 200px; }
+    button { padding: 10px 20px; background: #28a745; color: white; border: none; cursor: pointer; }
+    button:hover { background: #218838; }
+  </style>
+</head>
+<body>
+
+<h1>Code in the Attic</h1>
+<div id="intro" class="visible">
+  <p>You found an old chest in the attic. Solve the puzzles to unlock the code.</p>
+  <button onclick="nextPuzzle(1)">Start</button>
+</div>
+
+<div id="puzzle1" class="puzzle">
+  <p><strong>Puzzle 1:</strong> What has keys but can't open locks?</p>
+  <input type="text" id="answer1" placeholder="Your answer">
+  <button onclick="checkAnswer(1, 'piano')">Submit</button>
+</div>
+
+<div id="puzzle2" class="puzzle">
+  <p><strong>Puzzle 2:</strong> Decode this: R U O Y  K C O L  S I  T A H W ?</p>
+  <input type="text" id="answer2" placeholder="Your answer">
+  <button onclick="checkAnswer(2, 'what is lock your')">Submit</button>
+</div>
+
+<div id="success">
+  <h2>Congratulations!</h2>
+  <p>You unlocked the chest. Your discount code is:</p>
+  <h3>ESCAPE15</h3>
+  <p>Use it during checkout to get 15% off!</p>
+</div>
+
+<script>
+  function nextPuzzle(num) {
+    document.getElementById("intro").classList.remove("visible");
+    document.getElementById("puzzle" + num).classList.add("visible");
+  }
+
+  function checkAnswer(puzzleNumber, correctAnswer) {
+    const input = document.getElementById("answer" + puzzleNumber).value.trim().toLowerCase();
+    if (input === correctAnswer) {
+      document.getElementById("puzzle" + puzzleNumber).classList.remove("visible");
+      if (puzzleNumber === 2) {
+        document.getElementById("success").classList.add("visible");
+      } else {
+        document.getElementById("puzzle" + (puzzleNumber + 1)).classList.add("visible");
+      }
+    } else {
+      alert("Incorrect! Try again.");
+    }
+  }
+</script>
+
+</body>
+</html>
